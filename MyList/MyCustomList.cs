@@ -66,38 +66,39 @@ public class MyList
 
     }
 
-    public void Add(int index, int element){
-
-        {
+    public void Add(int index, int element) // добавляем элемент в массив без перезаписи
+    {
                 for (int i = Count; i >= index; i--)
                 {
-                    if (i + 2 >= _array.Length)
+                    if (i + 1 >= _array.Length)
                     {
                         Resize();
                     }
-                    _array[Count] = _array[i - 1];
+                    _array[i] = _array[i - 1];
                 }
-
                 _array[index] = element;
-        }
-        //Реализовать
+                Count++;
+    } 
 
-        //1, 2, 3, 5, 6, 7
-
-        //Add(3, 4)
-
-        //1, 2, 3, 4, 5, 6, 7
-
-    }
-
- 
-
-    public void Add(int index, int[] elements)
-
+    public void Add(int index, int[] elements) // добавляем массив элементов в изначальный массив без перезаписи
     {
+        for (int i = Count; i >= index; i--) // сдвигаем элементы массива направо на длину пришедшего массива
+        {
+            if (i + elements.Length >= _array.Length)
+            {
+                Resize(elements.Length);
+            }
+            _array[i + elements.Length] = _array[i];
+                //_array[i + elements.Length] = _array[i + elements.Length - 1];
+                
+            
+        }
 
-        //Реализовать
-
+        for (int i = 0; i < elements.Length; i++)
+        {
+            
+        }
+        Count+=elements.Length;
     }
 
  
@@ -132,15 +133,17 @@ public class MyList
         
         Array.Copy(_array, newArray, Count);
         _array = newArray;
+        Capacity = _array.Length;
     }
     
-    private void Resize(int arrayLenth)
+    private void Resize(int arrayLenth) // подумал что нет нужды отправлять сюда массив и доставать длину, если можно сразу отправить длину, не отправляя весь вассив для этого
     {
         int newLength = _array.Length * 2 + arrayLenth;
         var newArray = new int[newLength];
         
         Array.Copy(_array, newArray, Count);
         _array = newArray;
+        Capacity = _array.Length;
     }
     
     private void Copy(int[] sourceArray, int[] destinationArray)

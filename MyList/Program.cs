@@ -17,6 +17,10 @@ public class Program
         
         List.Add(3,4);
         List.PrintInfo();
+        
+        int[] secondArray = { 66, 666, 6666} ;
+        List.Add(6,secondArray);
+        List.PrintInfo();
     }
 }
 
