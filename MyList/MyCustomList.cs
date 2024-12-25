@@ -80,23 +80,21 @@ public class MyList
                 Count++;
     } 
 
-    public void Add(int index, int[] elements) // добавляем массив элементов в изначальный массив без перезаписи
+    public void Add(int index, int[] elements) // добавляем массив элементов в исходный массив без перезаписи
     {
-        for (int i = Count; i >= index; i--) // сдвигаем элементы массива направо на длину пришедшего массива
+        for (int i = Count; i >= index; i--) // сдвигаем элементы массива направо на длину поступившего массива
         {
             if (i + elements.Length >= _array.Length)
             {
                 Resize(elements.Length);
             }
+            
             _array[i + elements.Length] = _array[i];
-                //_array[i + elements.Length] = _array[i + elements.Length - 1];
-                
-            
         }
-
-        for (int i = 0; i < elements.Length; i++)
+        
+        for (int j = 0; j < elements.Length; j++) // записываем элементы поступившего массива в исходный
         {
-            
+            _array[j + index] = elements[j];
         }
         Count+=elements.Length;
     }
@@ -136,7 +134,7 @@ public class MyList
         Capacity = _array.Length;
     }
     
-    private void Resize(int arrayLenth) // подумал что нет нужды отправлять сюда массив и доставать длину, если можно сразу отправить длину, не отправляя весь вассив для этого
+    private void Resize(int arrayLenth) // подумал что нет нужды отправлять сюда массив и доставать длину, если можно сразу отправить длину, не отправляя весь массив
     {
         int newLength = _array.Length * 2 + arrayLenth;
         var newArray = new int[newLength];
